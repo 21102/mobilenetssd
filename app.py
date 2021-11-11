@@ -19,7 +19,6 @@ from linebot.models.template import *
 from linebot import (
     LineBotApi, WebhookHandler
 )
-
 app = Flask(__name__, static_url_path="/static")
 
 UPLOAD_FOLDER ='static/uploads/'
@@ -148,10 +147,15 @@ def event_handle(event):
         return ''
 
     if msgType == "text":
-       msg = str(event["message"]["text"])
+        msg = str(event["message"]["text"])
         if (msg == "สวัสดี") :
-        replyObj = TextSendMessage(text="ดีด้วย")
-        else :
+           replyObj = TextSendMessage(text="ดีด้วย")
+        elif (msg == "กินข้าวไหม") :
+           replyObj = TextSendMessage(text="กินจ้า") 
+        elif (msg == "ไปเที่ยวไหม") :  
+           replyObj = TextSendMessage(text="ไม่อะ")   
+        else :  
+           replyObj = TextSendMessage(text=msg)      
         line_bot_api.reply_message(rtoken, replyObj)
     elif msgType == "image":
         try:
